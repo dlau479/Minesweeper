@@ -207,7 +207,10 @@ public class Gameplay {
                return "redirect:/gameover?difficulty="+difficulty+"&minecount="+minecount+"&safecell="+safecell+"&clicks="+movecounter;
             }
             else if(BoardChecker()){
-                return "redirect:/win";
+                BoardChecker(safecell);
+                boardsize = null;
+                board = null;
+                return "redirect:/win?difficulty="+difficulty+"&minecount="+minecount+"&safecell="+safecell+"&clicks="+movecounter;
             }
 
             PrintBoard();

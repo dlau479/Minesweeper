@@ -3,7 +3,7 @@
 
 
 <head> 
-    <title>You Win!</title> 
+    <title>Game Over</title> 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -13,22 +13,18 @@
 </head>
 <body class = "text-center">
 
-  <main class="form-signin w-100 m-auto">
-      <form th:action = "@{/}">
-      <h1 class="h3 mb-3 fw-normal">You Win!</h1>
-      <div class="form-floating">
-          <select class="form-select" th:name="difficulty"  aria-label="Default select example">
-              <option th:value="Classic ">Classic</option>
-              <option th:value="Easy ">Easy</option>
-              <option th:value="Medium ">Medium</option>
-              <option th:value="Expert">Expert</option>
-          </select>
-      </div>
-      <button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
-      <p class="mt-5 mb-3 text-muted"></p>
-      </form>
-  </main>
-
-</body>
+    <main class="form-signin w-100 m-auto">
+        <form th:action = "@{/}">
+        <h1 class="h3 mb-3 fw-normal">You Win!</h1>
+        <div class="form-floating">
+            <p th:text = "You+' '+played+' '+on+' '+${difficulty}"></p>
+            <p th:text = "Mines+' '+left+' '+${mines}"></p>
+            <p th:text = "Moves+' '+you+' '+made+' '+${clicks}"></p>
+            <p th:text = "Safe+' '+cells+' '+left+' '+${safecells}"></p>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Play Agian</button>
+        <p class="mt-5 mb-3 text-muted"></p>
+        </form>
+    </main>
 
 </html>

@@ -13,11 +13,23 @@ import com.example.minesweeper.models.BoardGame;
 public class Winner {
 
     @GetMapping("/win")
+    public String gameplay(
+        @RequestParam (name = "difficulty", required = false) String difficulty,
+        @RequestParam (name = "minecount", required = false) String mines,
+        @RequestParam (name = "clicks", required = false) String clicks,
+        @RequestParam (name = "safecell" , required = false) String safecells,
+        Model model){
+            System.out.println("should be brought over "+ difficulty);
+            System.out.println("should be brought over "+ mines);
+            System.out.println("should be brought over "+ clicks);
+            System.out.println("should be brought over "+ safecells);
 
-    public String gameplay(){
-        
-
-        return "/pages/win";
+            model.addAttribute("difficulty",difficulty);
+            model.addAttribute("mines",mines);
+            model.addAttribute("clicks",clicks);
+            model.addAttribute("safecells",safecells);
+            
+            return "/pages/win";
     }
 
 }
