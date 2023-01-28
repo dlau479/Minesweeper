@@ -133,7 +133,7 @@ public class Gameplay {
         return true;
     }
     //Count safe Cells
-    private void BoardChecker(int count){
+    private void safeCellChecker(int count){
         for (int i = 0; i < board.length; i++){
             for (int j = 0; j < board[i].length; j++){
                 if(board[i][j].getValue() == 's'){
@@ -201,13 +201,13 @@ public class Gameplay {
             GameMoves(x, y, val, submit, flag);
             movecounter+=1;
             if(val.charAt(0) == 'b' && submit != null){
-                BoardChecker(safecell);
+                safeCellChecker(safecell);
                 boardsize = null;
                 board = null;
                return "redirect:/gameover?difficulty="+difficulty+"&minecount="+minecount+"&safecell="+safecell+"&clicks="+movecounter;
             }
             else if(BoardChecker()){
-                BoardChecker(safecell);
+                safeCellChecker(safecell);
                 boardsize = null;
                 board = null;
                 return "redirect:/win?difficulty="+difficulty+"&minecount="+minecount+"&safecell="+safecell+"&clicks="+movecounter;

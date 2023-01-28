@@ -12,7 +12,9 @@ When the program is ran the game will look as follows:
 - Move Made
     ![](/pictures/action.jpeg)
 - End Game
-    ![](/pictures/gameover.jpeg)
+    ![](/pictures/end.jpeg)
+- Scoreboard
+    ![](/pictures/scoreboard.jpeg)
 
 To run this program you will need:
 
@@ -20,6 +22,9 @@ To run this program you will need:
 
 [Java](https://openjdk.org/)
 
+[Postgresql](https://www.postgresql.org/)
+
+In order for the code to run correctly postgresql must be set up properly
 
 To run the code you can use this command to start the game.
 ```

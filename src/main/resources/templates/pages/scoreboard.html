@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>MineSweeper</title> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href = "custom.css" rel = "stylesheet">
+    <script src = "js/bootstrap.js"></script>
+</head>
+
+<body class = "text-center">
+
+    <main class="form-signin w-100 m-auto">
+        <h1 class="h1 mb-3 fw-normal">Highscores</h1>
+        <div class="form-floating">
+            <table class = "table">
+                <thead>
+                    <tr>
+                        <th scope = "col"> <h5 th:text = "Entry"> </h5> </th>
+                        <th scope = "col"> <h5 th:text = "Name"> </h5> </th>
+                        <th scope = "col"> <h5 th:text = "Won"> </h5> </th>
+                        <th scope = "col"> <h5 th:text = "Difficulty"> </h5> </th>
+                        <th scope = "col"> <h5 th:text = "Mines"> </h5> </th>
+                        <th scope = "col"> <h5 th:text = "Safe+' '+Space"> </h5> </th>
+                        <th scope = "col"> <h5 th:text = "Clicks">  </h5> </th>
+                    </tr>
+                </thead>
+                <tr th:each="i : ${#numbers.sequence(0, list.size()-1)}" th:value="${i}" >
+                    <th scope = "row" th:text = ${i+1}></th>
+                    <td> <p th:text = ${list.get(i).getName()}> </p></td>
+                    <td> <p th:text = ${list.get(i).getWinner()}> </p> </td>
+                    <td> <p th:text = ${list.get(i).getDifficulty()}> </p> </td>
+                    <td> <p th:text = ${list.get(i).getMines()}> </p> </td>
+                    <td> <p th:text = ${list.get(i).getSafespace()}> </p> </td>
+                    <td> <p th:text = ${list.get(i).getClicks()}> </p> </td>
+                </tr>
+            </table>
+        </div>
+        <form th:action = "@{/scoreboard}" th:method = "POST">
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Go Back</button>
+        </form>
+        <p class="mt-5 mb-3 text-muted"></p>
+        </form>
+    </main>
+
+</body>
+</html>

@@ -1,12 +1,13 @@
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.jdbc.core.JdbcTemplate;
+package com.example.minesweeper;
 
-public class Database  {
-    
+import java.util.List;
+import org.springframework.data.repository.CrudRepository;
 
+import com.example.minesweeper.models.highscores;
+
+public interface Database extends CrudRepository<highscores, Integer> {
+    List<highscores> findByName(String name);
     
+    highscores findById(int id);
 }
