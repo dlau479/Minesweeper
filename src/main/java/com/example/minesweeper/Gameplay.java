@@ -221,7 +221,7 @@ public class Gameplay {
         model.addAttribute("difficulty", difficulty);
         model.addAttribute("column",boardsize.getColumn());
         model.addAttribute("row",boardsize.getRow());
-        return "/pages/gameplay";
+        return "pages/gameplay";
     }
 
     @PostMapping("/gameplay")
@@ -232,7 +232,7 @@ public class Gameplay {
     Model model){
         System.out.println("should be brought over "+ difficulty);
         System.out.println("Over here");
-        return "/pages/gameover";
+        return "pages/gameover";
     }
 
 }

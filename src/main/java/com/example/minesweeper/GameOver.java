@@ -44,7 +44,7 @@ public class GameOver {
         model.addAttribute("mines",mines);
         model.addAttribute("clicks",clicks);
         model.addAttribute("safecells",safecells);
-        return "/pages/gameover";
+        return "pages/gameover";
     }
 
     @PostMapping("/gameover")

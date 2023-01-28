@@ -49,10 +49,11 @@ public class Scoreboard {
                     return  h2.getClicks() - h1.getClicks();
                 }
             });
-            len = l.size();
+            
         }
+        len = l.size();
         model.addAttribute("list",l);
-        return "/pages/scoreboard";
+        return "pages/scoreboard";
     }
 
     @PostMapping("/scoreboard")

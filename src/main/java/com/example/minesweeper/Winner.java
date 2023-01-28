@@ -41,7 +41,7 @@ public class Winner {
             model.addAttribute("clicks",clicks);
             model.addAttribute("safecells",safecells);
             
-            return "/pages/win";
+            return "pages/win";
     }
 
     @PostMapping("/win")
