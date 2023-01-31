@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.util.StopWatch;
 
+import java.util.Queue;
 import java.util.Random;
+import java.util.LinkedList;
 
 import javax.print.PrintException;
 
@@ -87,39 +89,6 @@ public class Gameplay {
         return new BoardSize(0,0);
     }
 
-    //Collect Cells finds all the possible cells in the grid and adds them to the list for later usage
-    private void CollectCells(int x, int y){
-        int left = 0;
-        int right = 0;
-        int up = 0;
-        int down = 0;
-        
-        int height = board.length;
-        int length = board[0].length;
-        
-
-        for (int i = x; i >= 0; i--){
-            if(board[i][y].getValue() == 'b')
-                break;
-            board[i][y].setValue('c');
-        }
-        for(int  i = x ; i < height ; i++){
-            if(board[i][y].getValue() == 'b')
-                break;
-            board[i][y].setValue('c');
-        }
-        for(int i = y; i >= 0; i--){
-            if(board[x][i].getValue() == 'b')
-                break;
-            board[x][i].setValue('c');
-        }
-        for(int  i = y; i < length; i++){
-            if(board[x][i].getValue() == 'b')
-                break;
-            board[x][i].setValue('c');
-        }
-        return ;
-    }
 
     //Check board
     private boolean BoardChecker(){
@@ -145,13 +114,111 @@ public class Gameplay {
         return;
     }
 
+
+    //Collect Cells finds all the possible cells in the grid and adds them to the list for later usage
+    private void CollectCells(Queue<Integer> xList, Queue<Integer> yList, Queue<Mine> mineList){
+        int x = xList.peek();
+        int y = yList.peek();
+        int width = board.length-1;
+        int length = board[0].length-1;
+        int left = x-1;
+        int right = x+1;
+        int up = y-1; 
+        int down = y+1;
+
+        try{
+            if(left >= 0 && right <= width && up >= 0 && down <= length){
+                if(board[left][y].getValue() == 's'){
+                    board[left][y].setValue('c');
+                    mineList.add(board[left][y]);
+                    xList.add(left);
+                    yList.add(y);
+                    System.out.println("Left complete x:"+left+" y:"+y);
+                }
+                if(board[right][y].getValue() == 's'){
+                    board[right][y].setValue('c');
+                    mineList.add(board[right][y]);
+                    xList.add(right);
+                    yList.add(y);
+                    System.out.println("Right complete x:"+right+" y:"+y);
+                }
+                if(board[x][up].getValue() == 's'){
+                    board[x][up].setValue('c');
+                    mineList.add(board[x][up]);
+                    xList.add(x);
+                    yList.add(up);
+                    System.out.println("Up complete x:"+x+" y:"+up);
+                }
+                if(board[x][down].getValue() == 's'){
+                    board[x][down].setValue('c');
+                    mineList.add(board[x][down]);
+                    xList.add(x);
+                    yList.add(down);
+                    System.out.println("Down complete x:"+x+" y:"+down);
+                }
+            }
+            board[x][y].setValue('c');
+            mineList.remove();
+            xList.remove();
+            yList.remove();
+        }
+        catch (IndexOutOfBoundsException e){
+            System.out.println(e+" x: "+x + " y: "+y);
+            board[x][y].setValue('c');
+            mineList.remove();
+            xList.remove();
+            yList.remove();
+        }
+        /*
+        int left = 0;
+        int right = 0;
+        int up = 0;
+        int down = 0;
+        
+        int height = board.length;
+        int length = board[0].length;
+    
+        for (int i = x; i >= 0; i--){
+            if(board[i][y].getValue() == 'b')
+                break;
+            board[i][y].setValue('c');
+        }
+        for(int  i = x ; i < height ; i++){
+            if(board[i][y].getValue() == 'b')
+                break;
+            board[i][y].setValue('c');
+        }
+        for(int i = y; i >= 0; i--){
+            if(board[x][i].getValue() == 'b')
+                break;
+            board[x][i].setValue('c');
+        }
+        for(int  i = y; i < length; i++){
+            if(board[x][i].getValue() == 'b')
+                break;
+            board[x][i].setValue('c');
+        }
+        */
+
+
+        return ;
+    }
+
     //clear the cells when player clicks on it.
     private void ClearCells(int x, int y){
         if(board[x][y].getValue() == 'b'){
           // GameOver();
           
         }
-        CollectCells(x, y);
+        Queue<Integer> xList = new LinkedList<Integer>();
+        Queue<Integer> yList = new LinkedList<Integer>();
+        Queue<Mine> mineList = new LinkedList<Mine>();
+        xList.add(x);
+        yList.add(y);
+        mineList.add(board[x][y]);
+        while(!mineList.isEmpty()){
+            CollectCells(xList,yList,mineList);
+        };
     }
 
     //Function is called when a player makes a move 
